@@ -16,12 +16,14 @@ grad = zeros(size(theta));
 %               You should set J to the cost.
 %               Compute the partial derivatives and set grad to the partial
 %               derivatives of the cost w.r.t. each parameter in theta
-n_map = size(X,2);
+
+%    对着公式写 简单的一批
+n_map = size(X,2); % x的列数 也就是一共又多少个features
 z = X*theta;
 J = 1/m * sum(-y.*log(sigmoid(z))-(1-y).*log(1-sigmoid(z))) + lambda/(2*m)*(sum(theta.^2)-theta(1).^2);
 
 grad_j0 = 1/m * X(:,1)'*(sigmoid(z)-y) ;
-grad_rest = 1/m * (X(:,2:n_map))'*(sigmoid(z)-y) + lambda/m .* theta(2:(n_map));
+grad_rest = 1/m * (X(:,2:n_map))'*(sigmoid(z)-y) + lambda/m .* theta(2:(n_map));%J=0的时候不加lambda那一块
 
 grad = [grad_j0;grad_rest];
 

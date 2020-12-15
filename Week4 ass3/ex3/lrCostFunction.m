@@ -35,7 +35,14 @@ grad = zeros(size(theta));
 %           temp(1) = 0;   % because we don't add anything for j = 0  
 %           grad = grad + YOUR_CODE_HERE (using the temp variable)
 %
+n_map = size(X,2); % x的列数 也就是一共又多少个features
+z = X*theta;
+J = 1/m * sum(-y.*log(sigmoid(z))-(1-y).*log(1-sigmoid(z))) + lambda/(2*m)*(sum(theta.^2)-theta(1).^2);
 
+grad_j0 = 1/m * X(:,1)'*(sigmoid(z)-y) ; %J=0的时候不加lambda那一块
+grad_rest = 1/m * (X(:,2:n_map))'*(sigmoid(z)-y) + lambda/m .* theta(2:n_map);
+
+grad = [grad_j0;grad_rest];
 
 
 
