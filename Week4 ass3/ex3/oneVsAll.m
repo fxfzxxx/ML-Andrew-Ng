@@ -37,17 +37,23 @@ X = [ones(m, 1) X];
 % Example Code for fmincg:
 %
 %     % Set Initial theta
-%     initial_theta = zeros(n + 1, 1);
+     initial_theta = zeros(n + 1, 1);
+     middle_theta = [];
 %     
 %     % Set options for fminunc
-%     options = optimset('GradObj', 'on', 'MaxIter', 50);
-% 
-%     % Run fmincg to obtain the optimal theta
-%     % This function will return theta and the cost 
+     options = optimset('GradObj', 'on', 'MaxIter', 50);
+ 
+     % Run fmincg to obtain the optimal theta
+     % This function will return theta and the cost 
 %     [theta] = ...
-%         fmincg (@(t)(lrCostFunction(t, X, (y == c), lambda)), ...
-%                 initial_theta, options);
-%
+   for c = 1:num_labels          
+       theta_each_class_column = fmincg (@(t)(lrCostFunction(t, X, (y == c), lambda)),initial_theta, options);
+       middle_theta = [middle_theta theta_each_class_column];
+   end
+   
+   all_theta = middle_theta';
+   
+
 
 
 
