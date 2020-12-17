@@ -5,6 +5,7 @@ function p = predict(Theta1, Theta2, X)
 
 % Useful values
 m = size(X, 1);
+num_hidden_layout = size(Theta1,1);
 num_labels = size(Theta2, 1);
 
 % You need to return the following variables correctly 
@@ -21,8 +22,15 @@ p = zeros(size(X, 1), 1);
 %       can use max(A, [], 2) to obtain the max for each row.
 %
 
-
-
+%先算第二层layout
+X = [ones(m,1) X];
+a2 = sigmoid(Theta1 * X');
+%再算最后一层layout
+a2 = [ones(1,m); a2];
+output = sigmoid(Theta2 * a2);
+%求出每一列的最大值
+[value index] = max(output);
+p = index';
 
 
 

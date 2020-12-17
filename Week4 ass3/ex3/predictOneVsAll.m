@@ -28,9 +28,9 @@ X = [ones(m, 1) X];
 %       max element, for more information see 'help max'. If your examples 
 %       are in rows, then, you can use max(A, [], 2) to obtain the max 
 %       for each row.
-%       
-
-
+%       这样求出来的index是每一列0000010的最大值 也就是概率最大的那一个取1
+[value index] = max((X*all_theta')'); %很奇怪输出的index 1 竟然是10
+p=index';%要求是列向量
 
 
 

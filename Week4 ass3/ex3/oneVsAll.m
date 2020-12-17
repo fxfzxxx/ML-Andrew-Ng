@@ -48,7 +48,7 @@ X = [ones(m, 1) X];
 %     [theta] = ...
    for c = 1:num_labels          
        theta_each_class_column = fmincg (@(t)(lrCostFunction(t, X, (y == c), lambda)),initial_theta, options);
-       middle_theta = [middle_theta theta_each_class_column];
+       middle_theta = [middle_theta theta_each_class_column];%把所有theta列 排起来
    end
    
    all_theta = middle_theta';
